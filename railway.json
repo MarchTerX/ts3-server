@@ -1,0 +1,12 @@
+{
+    "build": {
+      "dockerfile": "Dockerfile"
+    },
+    "deploy": {
+      "startCommand": "./ts3server"
+    },
+    "env": {
+      "TS3SERVER_LICENSE": "accept"
+    }
+  }
+  
