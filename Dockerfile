@@ -9,6 +9,7 @@ WORKDIR /opt/teamspeak
 # Download and extract TeamSpeak 6 Client
 RUN wget -O teamspeak-client.tar.gz https://files.teamspeak-services.com/pre_releases/client/6.0.0-beta2/teamspeak-client.tar.gz \
     && tar -xvzf teamspeak-client.tar.gz \
+    && mv teamspeak3-server_linux_amd64/* . \
     && rm -rf teamspeak-client.tar.gz
 
 # Accept the license agreement
