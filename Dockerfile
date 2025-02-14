@@ -11,8 +11,14 @@ RUN wget -O teamspeak-client.tar.gz https://files.teamspeak-services.com/pre_rel
     && tar -xvzf teamspeak-client.tar.gz \
     && rm -rf teamspeak-client.tar.gz
 
-# Expose necessary ports (if applicable)
+# Accept the license agreement
+RUN touch .ts3server_license_accepted
+
+# Ensure the `ts3server` file is executable
+RUN chmod +x ts3server
+
+# Expose necessary ports
 EXPOSE 9987/udp 10011 30033
 
-# Run the client (if applicable)
-CMD ["bash"]
+# Run the server
+CMD ["./ts3server", "inifile=ts3server.ini"]
