@@ -1,22 +1,18 @@
 FROM debian:latest
 
-# update
-RUN apt update && apt install -y wget bzip2 nano
+# Install required packages
+RUN apt update && apt install -y wget bzip2 nano tar
 
-# config directory
+# Set the working directory
 WORKDIR /opt/teamspeak
 
-# download ts3 server
-RUN wget https://files.teamspeak-services.com/pre_releases/client/6.0.0-beta2/teamspeak-client.tar.gz \
-    && tar xvf teamspeak3-server_linux_amd64-3.13.7.tar.bz2 \
-    && mv teamspeak3-server_linux_amd64/* . \
-    && rm -rf teamspeak3-server_linux_amd64 teamspeak3-server_linux_amd64-3.13.7.tar.bz2
+# Download and extract TeamSpeak 6 Client
+RUN wget -O teamspeak-client.tar.gz https://files.teamspeak-services.com/pre_releases/client/6.0.0-beta2/teamspeak-client.tar.gz2 \
+    && tar -xvzf teamspeak-client.tar.gz \
+    && rm -rf teamspeak-client.tar.gz
 
-# agree License Agreement
-RUN touch .ts3server_license_accepted
-
-# open port 
+# Expose necessary ports (if applicable)
 EXPOSE 9987/udp 10011 30033
 
-# execute
-CMD ["./ts3server", "inifile=ts3server.ini"]
+# Run the client (if applicable)
+CMD ["bash"]
